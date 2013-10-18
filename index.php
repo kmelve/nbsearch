@@ -15,7 +15,6 @@
 
   <title>NB PDF Søk</title>
 
-  
   <link rel="stylesheet" href="css/foundation.css">
   <style>
   	body {
