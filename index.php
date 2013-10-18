@@ -32,6 +32,7 @@
   <script src="js/vendor/custom.modernizr.js"></script>
 
 </head>
+
 <?php
 if (isset($_GET["searchword"])) {
 	$searchword = $_GET["searchword"];
@@ -46,10 +47,11 @@ if (isset($_GET["searchword"])) {
 
 if(function_exists("curl_init")){ // Check if cURL is available
 	
+	//I've struggled a bit to get UTF-8 input to work properly. I think urlencode fixes it.
 	$str = "?q=".urlencode($searchword)."&ft=".$freetext."&itemsPerPage=".$itemsPerPage."&filter=".urlencode($filter)/*."&sort=".$sort*/; // Sort-paramater disabled
 	
 	
-	// In case I need the URLs other places, it's nice to have them as variables
+	// In case I need these URLs several places, it's nice to have them as variables
 	$searchbaseurl = "http://www.nb.no/services/search/v2/search";
 	$nburnbaseurl = "http://urn.nb.no/";
 	$downloadbaseurl = "http://www.nb.no/nbsok/content/pdf?urn="; 
@@ -61,7 +63,7 @@ if(function_exists("curl_init")){ // Check if cURL is available
 	curl_setopt_array($curl, array(
 			CURLOPT_RETURNTRANSFER 		=> true,
 			CURLOPT_URL 				=> $url,
-//			CURLOPT_PROGRESSFUNCTION	=>	"progress", // This is to be used for the progressbar
+//			CURLOPT_PROGRESSFUNCTION	=>	"progress", // This is to be used for a progress bar
 			CURLOPT_HTTPHEADER			=> array('Content-Type: text/xml; charset="UTF-8"'),
 			CURLOPT_ENCODING			=> "UTF-8",
 			CURLOPT_USERAGENT 			=> "NB PDF SØK",
@@ -261,6 +263,11 @@ if(function_exists("curl_init")){ // Check if cURL is available
 				<div class="content" data-section-content>
 					<p>
 					<ul class="no-bullet">
+						<li>18/10/2013
+							<ul>
+								<li>Nå ligger kildekoden ute på <a href="https://github.com/kmelve/nbsearch/">GitHub</a>.
+							</ul>
+						</li>
 						<li>19/08/2013
 							<ul>
 								<li>Nå med GET i stedet for PHP. Gjør søkene delbare</li>
@@ -294,7 +301,7 @@ if(function_exists("curl_init")){ // Check if cURL is available
 						<li>Filtrere ut utilgjengelige søketreff</li>
 						<li>Mulighet for å eksportere en enkel .txt med alle lenkene oppført i en liste (til i wget o.l.)</li>
 						<li>Gjøre tabell interaktiv</li>
-						<li>Legge inn i en github-rep</li>
+						<li><stroke>Legge inn i en github-rep</stroke></li>
 					</ul>
 					</p>
 				</div>
@@ -378,9 +385,6 @@ if(function_exists("curl_init")){ // Check if cURL is available
 	
 	$(function() {
 	   $(document).foundation();
-	$('.nedlastningslenker').multiDownloadAdd();
-	$('.nedlastningsknapp').multiDownload('click', { delay: 500 });
-	  
 	});    
 </script>
 </body>
