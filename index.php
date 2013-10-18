@@ -9,8 +9,8 @@
   
 	<meta property="og:title" content="NB PDF S&oslash;k" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://jekyll-hyde.no/nbsearch" />
-	<meta property="og:image" content="http://jekyll-hyde.no/nbsearch/img/logo.png" />
+	<meta property="og:url" content="http://jekyll-hyde.no/nbsearch" /> //URL specific to my server. 
+	<meta property="og:image" content="http://jekyll-hyde.no/nbsearch/img/logo.png" /> //URL specific to my server. 
 	<meta property="og:description" content="NB PDF SØK (ß) er et verktøy for &aring; lage en enkel liste med nedlastningslenker til digitalisert innhold." />
 
   <title>NB PDF Søk</title>
