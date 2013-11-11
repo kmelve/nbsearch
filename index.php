@@ -9,8 +9,8 @@
   
 	<meta property="og:title" content="NB PDF S&oslash;k" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://jekyll-hyde.no/nbsearch" /> //URL specific to my server. 
-	<meta property="og:image" content="http://jekyll-hyde.no/nbsearch/img/logo.png" /> //URL specific to my server. 
+	<meta property="og:url" content="http://jekyll-hyde.no/nbsearch" /> 
+	<meta property="og:image" content="http://jekyll-hyde.no/nbsearch/img/logo.png" />
 	<meta property="og:description" content="NB PDF SØK (ß) er et verktøy for &aring; lage en enkel liste med nedlastningslenker til digitalisert innhold." />
 
   <title>NB PDF Søk</title>
@@ -38,7 +38,7 @@ if (isset($_GET["searchword"])) {
 	$itemsPerPage = $_GET["itemsPerPage"];
 //	$filter = "mediatype:B&oslash;ker";
 	$filter = "mediatype:".$_GET["filter"];
-//	$sort = "sort=".$_GET["sort"];
+	$sort = $_GET["sort"];
 	$freetext = $_GET["freetext"];
 
 //	$tilgjengeligeaviser = array("Firda Folkeblad","Folkebladet for Sogn og Fjordane","Fylkestidende for Sogn og Fjordane","Hardanger","Nordlands Avis","Nordre Bergenhus Amtstidende","Nordre Bergenhus Folkeblad","Ranens Tidende","Søndfjords Avis");
@@ -47,8 +47,8 @@ if (isset($_GET["searchword"])) {
 if(function_exists("curl_init")){ // Check if cURL is available
 	
 	//I've struggled a bit to get UTF-8 input to work properly. I think urlencode fixes it.
-	$str = "?q=".urlencode($searchword)."&ft=".$freetext."&itemsPerPage=".$itemsPerPage."&filter=".urlencode($filter)/*."&sort=".$sort*/; // Sort-paramater disabled
-	
+	$str = "?q=".urlencode($searchword)."%20(contentClasses:%22public%22)&ft=".$freetext."&itemsPerPage=".$itemsPerPage."&filter=".urlencode($filter)."&sort=".$sort;
+
 	
 	// In case I need these URLs several places, it's nice to have them as variables
 	$searchbaseurl = "http://www.nb.no/services/search/v2/search";
@@ -127,9 +127,9 @@ if(function_exists("curl_init")){ // Check if cURL is available
 					<label>Maks antall treff</label>
 						<input type="number" value="<?php if(isset($itemsPerPage)) { echo $itemsPerPage; } else { echo "10"; } ?>" name="itemsPerPage" placeholder="<?php if(isset($itemsPerPage)) { echo $itemsPerPage; } else { echo "10"; } ?>" min="1" max="9999">
 					</div>
-					<div class="large-8 columns">
+					<div class="large-4 columns">
 						<label for="customDropdown1">Medietype</label>
-						<select name="filter" id="customDropdown1" class="medium">
+						<select name="filter" id="customDropdown1" class="small">
 								<option value="" DISABLED>Velg medietype</option>
 								<?php 
 									 $i=0;
@@ -140,8 +140,21 @@ if(function_exists("curl_init")){ // Check if cURL is available
 							
 						</select>
 					</div>
+					<div class="large-4 columns">
+						<label for="customDropdown2">Sorter treff</label>
+						<select name="sort" id="customDropdown2" class="small">
+							<option value "" DISABLED>Sorter</option>
+							<?php 
+										 $i=0;
+										 $array=array("title:asc", "title:desc", "date:asc", "date:desc");
+										while ($i<5){ ?>
+										<option value="<?php echo $array[$i];?>" <?php if ((empty($searchword) == false) && ($_GET["sort"] == $array[$i])) { echo 'selected';} ?>><?php echo $array[$i];?></option>
+										<?php $i++; } ?>
+						</select>
 				</div>
+				<div class="large-12 columns">
 				<button class="button prefix" type="submit">Søk</button>
+				</div>
 			</fieldset>
 	</form>
 	</div>
@@ -156,13 +169,13 @@ if(function_exists("curl_init")){ // Check if cURL is available
 				<p class="title" data-section-title><a href="#panel1">Søketreff</a></p>
 				<div class="content" data-section-content>
 					<div class="empty child"></div>
-					<span class="label">Klikk på lenkene for å laste ned.</span>
+					<?php if(isset($searchword)) echo "Søkefrase: <span class=\"label alert\">".$searchword."</span> "; ?>
 <!-- 					<button class="nedlastningsknapp">Klikk for å laste ned alle filene</button><span label="alert label">Bruk med omhu!</span> -->
 	
 						<table>
 							<thead
 								<tr>
-									<th width="33%">Kilde</th>
+									<th width="33%">Kilde <?php if(isset($searchword)) echo '<span class="label">Klikk på lenkene for å laste ned.</span>'; ?></th>
 									<th>Utdrag</th>
 									<th width="13%">Åpne i <a href="http://nb.no">nb.no</a></th>
 								</tr>
