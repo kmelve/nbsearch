@@ -275,6 +275,10 @@ if(function_exists("curl_init")){ // Check if cURL is available
 				<div class="content" data-section-content>
 					<p>
 					<ul class="no-bullet">
+						<li>11/11/2013
+							<ul>Filterer ut ikke-nedlastbare treff med contentClasses:"public". Kan legge dette inn som valg om noen er interessert i å ha utilgengelige treff inn i listen igjen</ul>
+							<ul>Har lagt til sortering av søkeresultat.</ul>
+						</li>
 						<li>18/10/2013
 							<ul>
 								<li>Nå ligger kildekoden ute på <a href="https://github.com/kmelve/nbsearch/">GitHub</a>.
@@ -308,12 +312,12 @@ if(function_exists("curl_init")){ // Check if cURL is available
 					<p>
 					<ul class="no-bullet">
 						<li>Fikse PHPen slik at siden laster skikkelig uten søkedata</li>
-						<li>Flere søkevalg, inkludert dato-avgrensning og sortering</li>
+						<li>Flere søkevalg, inkludert dato-avgrensning og <s>sortering</s></li>
 						<li>Legge inn progressbar</li>
-						<li>Filtrere ut utilgjengelige søketreff</li>
+						<li><s>Filtrere ut utilgjengelige søketreff</s></li>
 						<li>Mulighet for å eksportere en enkel .txt med alle lenkene oppført i en liste (til i wget o.l.)</li>
 						<li>Gjøre tabell interaktiv</li>
-						<li><stroke>Legge inn i en github-rep</stroke></li>
+						<li><s>Legge inn i en github-rep</s></li>
 					</ul>
 					</p>
 				</div>
