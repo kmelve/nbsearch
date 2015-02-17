@@ -3,7 +3,7 @@ nbsearch
 
 NBsearch is a tool for generating a simple list of search results from the [National Library of Norway's](http://www.nb.no/English) archive.
 
-Go to [jekyll-hyde.no/nbsearch](http://jekyll-hyde.no/nbsearcg) to try the service, or clone these files to your own server. 
+Go to [jekyll-hyde.no/nbsearch](http://jekyll-hyde.no/nbsearch) to try the service, or clone these files to your own server. 
 
 NBsearch is skinned with [Zurb's Foundation](http://foundation.zurb.com). But nothing about the core functionality is dependent on it.
 
